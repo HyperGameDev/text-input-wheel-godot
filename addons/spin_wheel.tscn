@@ -9,14 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://swfesmtw11ic" path="res://addons/assets_spin_wheel/spin_wheel_button_press.png" id="4_taphi"]
 [ext_resource type="Texture2D" uid="uid://cbu3r8pscyuvj" path="res://addons/assets_spin_wheel/spin_wheel_arrow.png" id="6_iiacy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwntg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61ynx"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
 
-[node name="spin_wheel" type="Control"]
+[node name="spin_wheel" type="Control" node_paths=PackedStringArray("text_box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(440, 622)
 script = ExtResource("1_oakmn")
+text_box = NodePath("background/front/Centre/B")
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -55,181 +53,40 @@ scale = Vector2(0.92, 0.92)
 pivot_offset = Vector2(450, 450)
 texture = ExtResource("2_h18fy")
 
-[node name="B" type="LineEdit" parent="background/front"]
+[node name="Centre" type="Control" parent="background/front"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -71.5
-offset_top = -374.435
-offset_right = 71.5
-offset_bottom = -286.435
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
 
-[node name="G" type="LineEdit" parent="background/front"]
+[node name="B" type="LineEdit" parent="background/front/Centre"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -316.304
-offset_top = -282.609
-offset_right = -173.304
-offset_bottom = -194.609
+offset_left = -98.0
+offset_top = -375.0
+offset_right = 98.0
+offset_bottom = -287.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_nns8t")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_61ynx")
 alignment = 1
 expand_to_text_length = true
 flat = true
 select_all_on_focus = true
-
-[node name="LB" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -361.957
-offset_top = -42.3913
-offset_right = -218.957
-offset_bottom = 45.6087
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
-
-[node name="Y" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -311.957
-offset_top = 183.696
-offset_right = -168.957
-offset_bottom = 271.696
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
-
-[node name="M" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.5652
-offset_top = 298.913
-offset_right = 73.4348
-offset_bottom = 386.913
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
-
-[node name="LG" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 186.957
-offset_top = 196.739
-offset_right = 329.957
-offset_bottom = 284.739
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
-
-[node name="O" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 220.652
-offset_top = -39.1304
-offset_right = 363.652
-offset_bottom = 48.8696
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
-
-[node name="P" type="LineEdit" parent="background/front"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 183.696
-offset_top = -279.348
-offset_right = 326.696
-offset_bottom = -191.348
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_nns8t")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rwntg")
-alignment = 1
-expand_to_text_length = true
-flat = true
-select_all_on_focus = true
+caret_blink = true
 
 [node name="background_button" type="TextureRect" parent="background"]
 layout_mode = 1
