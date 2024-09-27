@@ -93,7 +93,7 @@ func _on_btn_spin_pressed():
     if is_spin == false:
         is_spin = true
         var tween := get_tree().create_tween().set_parallel()
-        reward_position = randi_range(0, 360) #random position from 0 to 360 degrees
+        reward_position = randi_range(0, 360) - 22.5 #random position from 0 to 360 degrees
 
         var selected: Dictionary
         for item in vat_pham:
