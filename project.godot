@@ -12,13 +12,17 @@ config_version=5
 
 config/name="Spin Wheel Godot"
 run/main_scene="res://addons/spin_wheel.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
+config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_height=1000
 window/size/always_on_top=true
+
+[dotnet]
+
+project/assembly_name="Spin Wheel Godot"
 
 [rendering]
 
