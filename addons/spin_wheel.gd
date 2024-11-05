@@ -9,6 +9,11 @@ var text_boxes: Array[LineEdit] = []
 var target_rot: float = 0
 var from_rot: float
 
+var save_path: String = "res://data.json"
+
+@onready var history_label: Control = $History/Panel/Label
+@onready var history_animations: AnimationPlayer = $History/HistoryAnimations
+
 var vat_pham: Array[Dictionary] = [
 	{
 		"name": "Dark blue",
@@ -60,9 +65,12 @@ var vat_pham: Array[Dictionary] = [
 	}
 ]
 
+var history : Dictionary = {} #Structured as {"theme_name", amount_on_wheel}
+
 func _ready() -> void:
 	%Panel.get_parent().position.y = %Panel.size.y
 	var text_container: Control = text_box.get_parent()
+	history = load_history(save_path)
 	for i in 8:
 		var new_text_box: LineEdit = text_box.duplicate()
 		text_container.add_child(new_text_box)
@@ -91,6 +99,7 @@ func _ready() -> void:
 
 func _on_btn_spin_pressed():
 	if is_spin == false:
+		log_history(vat_pham, history) # Log new entries on spin
 		is_spin = true
 		var tween := get_tree().create_tween().set_parallel()
 		reward_position = randi_range(0, 360) - 22.5 #random position from 0 to 360 degrees
@@ -112,3 +121,42 @@ func _on_btn_spin_pressed():
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_QUAD)
 		tween.tween_property(%Panel.get_parent(), "position:y", 0, 1.0)
+
+## HISTORY CODE
+
+func log_history(entries: Array, history: Dictionary):
+	for i in entries:
+		if i.text_box.text == "": # if box is empty don't add
+			continue
+		var entry = i.text_box.text.capitalize() #format nicely
+		if history.has(entry): # If already in history
+			history[entry] += 1 # increment counter
+		else: # not in history
+			history[entry] = 1 # create the entry
+	save_history(history, save_path)
+	update_history_label(history)
+
+func save_history(history: Dictionary, path: String):
+	var data = JSON.stringify(history, "\t")
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	file.store_string(data)
+
+func load_history(path: String) -> Dictionary:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file:
+		var content: Dictionary = JSON.parse_string(file.get_as_text())
+		update_history_label(content)
+		return content
+	return {}
+
+func update_history_label(history: Dictionary):
+	var str = ""
+	for i in history:
+		str += str(i, ": ", history[i], "\n")
+	history_label.text = str
+
+func _on_history_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		history_animations.play("Show")
+	else:
+		history_animations.play("Hide")
