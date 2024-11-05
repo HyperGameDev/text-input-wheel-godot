@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://clfvobvi3rno6"]
+[gd_scene load_steps=16 format=3 uid="uid://clfvobvi3rno6"]
 
 [ext_resource type="Texture2D" uid="uid://o5281jsg2i68" path="res://addons/assets_spin_wheel/spin_wheel_background.png" id="1_h5jq3"]
 [ext_resource type="Script" path="res://addons/spin_wheel.gd" id="1_oakmn"]
@@ -17,6 +17,63 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 bg_color = Color(0, 0.957498, 0.779338, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df5i2"]
+bg_color = Color(0.96, 0.368, 0, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[sub_resource type="Animation" id="Animation_tsoyt"]
+resource_name = "Hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-270, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ar5hw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-270, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lpp66"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-270, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1cse"]
+_data = {
+"Hide": SubResource("Animation_tsoyt"),
+"RESET": SubResource("Animation_ar5hw"),
+"Show": SubResource("Animation_lpp66")
+}
 
 [node name="spin_wheel" type="Control" node_paths=PackedStringArray("text_box")]
 layout_mode = 3
@@ -202,4 +259,40 @@ text = "Theme:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="History" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -270.0
+offset_right = -230.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="History"]
+layout_mode = 0
+offset_right = 268.0
+offset_bottom = 768.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_df5i2")
+
+[node name="Label" type="RichTextLabel" parent="History/Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 254.0
+offset_bottom = 741.0
+theme_override_fonts/normal_font = ExtResource("4_nns8t")
+theme_override_font_sizes/normal_font_size = 32
+
+[node name="HistoryAnimations" type="AnimationPlayer" parent="History"]
+libraries = {
+"": SubResource("AnimationLibrary_i1cse")
+}
+
+[node name="Button" type="Button" parent="History"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 7.0
+offset_right = 345.0
+offset_bottom = 38.0
+toggle_mode = true
+text = "History"
+
 [connection signal="pressed" from="background/btn_spin" to="." method="_on_btn_spin_pressed"]
+[connection signal="toggled" from="History/Button" to="." method="_on_history_button_toggled"]
