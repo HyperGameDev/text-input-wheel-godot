@@ -4,7 +4,7 @@
 
 ![screenshot](https://raw.githubusercontent.com/PhamMinhKha/spin-wheel-godot/main/addons/screenshoot.png)
 
-<h1 align="center">
+<h1 align="left">
   Credits
 </h1>
 
