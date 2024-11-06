@@ -1,27 +1,41 @@
-[gd_scene load_steps=16 format=3 uid="uid://clfvobvi3rno6"]
+[gd_scene load_steps=23 format=3 uid="uid://clfvobvi3rno6"]
 
 [ext_resource type="Texture2D" uid="uid://o5281jsg2i68" path="res://addons/assets_spin_wheel/spin_wheel_background.png" id="1_h5jq3"]
 [ext_resource type="Script" path="res://addons/spin_wheel.gd" id="1_oakmn"]
 [ext_resource type="Texture2D" uid="uid://ff556ic5603l" path="res://addons/assets_spin_wheel/spin_wheel_front_empty.png" id="2_h18fy"]
+[ext_resource type="Shader" path="res://addons/background1.gdshader" id="2_lk47c"]
 [ext_resource type="Texture2D" uid="uid://defxo6urikxl6" path="res://addons/assets_spin_wheel/spin_wheel_button_ring.png" id="3_doaok"]
 [ext_resource type="Texture2D" uid="uid://bsd6eravgnhy5" path="res://addons/assets_spin_wheel/spin_wheel_button.png" id="3_i8ccs"]
 [ext_resource type="FontFile" uid="uid://c8b0gljcc5kwx" path="res://addons/assets_spin_wheel/norwester.otf" id="4_nns8t"]
 [ext_resource type="Texture2D" uid="uid://swfesmtw11ic" path="res://addons/assets_spin_wheel/spin_wheel_button_press.png" id="4_taphi"]
 [ext_resource type="Texture2D" uid="uid://cbu3r8pscyuvj" path="res://addons/assets_spin_wheel/spin_wheel_arrow.png" id="6_iiacy"]
+[ext_resource type="Texture2D" uid="uid://cpfuv641u5373" path="res://addons/icon_history.png" id="10_k1min"]
+[ext_resource type="Texture2D" uid="uid://b2j534py5b0im" path="res://addons/icon_reset.png" id="11_xdlmj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hjib"]
+shader = ExtResource("2_lk47c")
+shader_parameter/color_one = Color(0.188235, 0.0823529, 0.270588, 1)
+shader_parameter/color_two = Color(0.117647, 0.156863, 0.427451, 1)
+shader_parameter/angle = 20.0
+shader_parameter/line_count = 60.0
+shader_parameter/speed = 1.0
+shader_parameter/blur = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61ynx"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3r3a"]
-bg_color = Color(0, 0.957498, 0.779338, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
+
+[sub_resource type="FontVariation" id="FontVariation_easgd"]
+base_font = ExtResource("4_nns8t")
+spacing_glyph = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df5i2"]
-bg_color = Color(0.96, 0.368, 0, 1)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
+bg_color = Color(0.188235, 0.0823529, 0.270588, 1)
+shadow_color = Color(0.118, 0.157, 0.427, 0.745)
+shadow_size = 50
+shadow_offset = Vector2(0, 5)
 
 [sub_resource type="Animation" id="Animation_tsoyt"]
 resource_name = "Hide"
@@ -38,11 +52,40 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-270, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0c60v"]
+resource_name = "Hide_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Panel_History:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"history_animation_hide"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_ar5hw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -51,6 +94,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-270, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Panel_History:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_lpp66"]
@@ -68,11 +123,28 @@ tracks/0/keys = {
 "values": [Vector2(-270, 0), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_2tm53"]
+resource_name = "Show_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Panel_History:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i1cse"]
 _data = {
 "Hide": SubResource("Animation_tsoyt"),
+"Hide_fade": SubResource("Animation_0c60v"),
 "RESET": SubResource("Animation_ar5hw"),
-"Show": SubResource("Animation_lpp66")
+"Show": SubResource("Animation_lpp66"),
+"Show_fade": SubResource("Animation_2tm53")
 }
 
 [node name="spin_wheel" type="Control" node_paths=PackedStringArray("text_box")]
@@ -84,9 +156,18 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(440, 622)
 script = ExtResource("1_oakmn")
-text_box = NodePath("background/front/Centre/B")
+text_box = NodePath("wheel_outline/front/Centre/B")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="Background" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_8hjib")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="wheel_outline" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,12 +182,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_h5jq3")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="background"]
+[node name="CanvasModulate" type="CanvasModulate" parent="wheel_outline"]
 visible = false
 position = Vector2(159, 190)
 color = Color(0.0117647, 1, 0.901961, 1)
 
-[node name="front" type="TextureRect" parent="background"]
+[node name="front" type="TextureRect" parent="wheel_outline"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 900.0
@@ -115,7 +196,7 @@ scale = Vector2(0.92, 0.92)
 pivot_offset = Vector2(450, 450)
 texture = ExtResource("2_h18fy")
 
-[node name="Centre" type="Control" parent="background/front"]
+[node name="Centre" type="Control" parent="wheel_outline/front"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -127,7 +208,7 @@ offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="B" type="LineEdit" parent="background/front/Centre"]
+[node name="B" type="LineEdit" parent="wheel_outline/front/Centre"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -140,7 +221,9 @@ offset_right = 98.0
 offset_bottom = -287.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.188235, 0.0823529, 0.270588, 1)
+theme_override_colors/font_color = Color(0.79, 0.958, 1, 1)
+theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("4_nns8t")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxFlat_61ynx")
@@ -150,7 +233,7 @@ flat = true
 select_all_on_focus = true
 caret_blink = true
 
-[node name="background_button" type="TextureRect" parent="background"]
+[node name="background_button" type="TextureRect" parent="wheel_outline"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -165,7 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_doaok")
 
-[node name="btn_spin" type="TextureButton" parent="background"]
+[node name="btn_spin" type="TextureButton" parent="wheel_outline"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,7 +267,7 @@ texture_normal = ExtResource("3_i8ccs")
 texture_pressed = ExtResource("4_taphi")
 stretch_mode = 3
 
-[node name="arrow" type="TextureRect" parent="background"]
+[node name="arrow" type="TextureRect" parent="wheel_outline"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -208,6 +291,7 @@ mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Control"]
 unique_name_in_owner = true
+self_modulate = Color(0.932, 0.932, 0.932, 0.914)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -234,7 +318,7 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 15
 theme_override_constants/shadow_outline_size = 60
-theme_override_fonts/font = ExtResource("4_nns8t")
+theme_override_fonts/font = SubResource("FontVariation_easgd")
 theme_override_font_sizes/font_size = 106
 text = "aaa"
 horizontal_alignment = 1
@@ -260,39 +344,64 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="History" type="Control" parent="."]
+layout_mode = 1
 anchors_preset = 0
 offset_left = -270.0
 offset_right = -230.0
 offset_bottom = 40.0
 
-[node name="Panel" type="Panel" parent="History"]
+[node name="Panel_History" type="Panel" parent="History"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 0
-offset_right = 268.0
-offset_bottom = 768.0
+offset_left = 270.0
+offset_top = 409.0
+offset_right = 1422.0
+offset_bottom = 776.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_df5i2")
 
-[node name="Label" type="RichTextLabel" parent="History/Panel"]
+[node name="History_Label" type="RichTextLabel" parent="History/Panel_History"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 254.0
-offset_bottom = 741.0
+offset_left = 28.0
+offset_top = 33.0
+offset_right = 1122.0
+offset_bottom = 329.0
+theme_override_colors/table_even_row_bg = Color(0.487662, 0.487662, 0.487662, 1)
+theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 23
 theme_override_fonts/normal_font = ExtResource("4_nns8t")
 theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+meta_underlined = false
 
-[node name="HistoryAnimations" type="AnimationPlayer" parent="History"]
+[node name="HistoryAnimations" type="AnimationPlayer" parent="History/Panel_History"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i1cse")
 }
 
-[node name="Button" type="Button" parent="History"]
+[node name="Button_History" type="Button" parent="History"]
 layout_mode = 0
-offset_left = 281.0
-offset_top = 7.0
-offset_right = 345.0
-offset_bottom = 38.0
+offset_left = 270.0
+offset_top = 737.0
+offset_right = 308.0
+offset_bottom = 775.0
+theme_override_fonts/font = ExtResource("4_nns8t")
 toggle_mode = true
-text = "History"
+icon = ExtResource("10_k1min")
+expand_icon = true
 
-[connection signal="pressed" from="background/btn_spin" to="." method="_on_btn_spin_pressed"]
-[connection signal="toggled" from="History/Button" to="." method="_on_history_button_toggled"]
+[node name="Button_Reset" type="Button" parent="History"]
+layout_mode = 0
+offset_left = 1384.0
+offset_top = 737.0
+offset_right = 1422.0
+offset_bottom = 775.0
+theme_override_fonts/font = ExtResource("4_nns8t")
+icon = ExtResource("11_xdlmj")
+expand_icon = true
+
+[connection signal="pressed" from="wheel_outline/btn_spin" to="." method="_on_btn_spin_pressed"]
+[connection signal="toggled" from="History/Button_History" to="." method="_on_history_button_toggled"]
+[connection signal="pressed" from="History/Button_Reset" to="." method="_on_button_reset_pressed"]
