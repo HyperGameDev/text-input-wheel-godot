@@ -2,7 +2,7 @@
   Spin Wheel Godot
 </h1>
 
-![screenshot](https://raw.githubusercontent.com/PhamMinhKha/spin-wheel-godot/main/addons/screenshoot.png)
+A spinnable wheel with text inputs, history-keeping, topics display, and more.
 
 <h1 align="left">
   Credits
