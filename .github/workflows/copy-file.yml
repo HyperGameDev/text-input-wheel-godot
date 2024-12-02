@@ -26,14 +26,14 @@ jobs:
     - name: Copy file
       run: cp source/export/data.json destination/data/wheel-topics.json
 
-    - name: Update last-updated.json
-      run: destination/scripts/update-timestamp.sh
+    - name: Update last-updated-topics.json
+      run: destination/scripts/update-timestamp-topics.sh
 
     - name: Commit and push changes
       run: |
         cd destination
         git config --global user.email "lyz@hypergame.dev"
         git config --global user.name "HyperGameDev"
-        git add data/wheel-topics.json data/last-updated.json
-        git commit -m "Update wheel-topics.json and last-updated.json"
+        git add data/wheel-topics.json data/last-updated-topics.json
+        git commit -m "Update wheel-topics.json and last-updated-topics.json"
         git push
