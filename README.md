@@ -4,6 +4,9 @@
 
 A spinnable wheel with text inputs, history-keeping, topics display, and more.
 
+![screenshot]([https://raw.githubusercontent.com/PhamMinhKha/spin-wheel-godot/main/addons/screenshoot.png](https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel1.png))
+![screenshot]([https://raw.githubusercontent.com/PhamMinhKha/spin-wheel-godot/main/addons/screenshoot.png](https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel2.png))
+
 <h1 align="left">
   Credits
 </h1>
