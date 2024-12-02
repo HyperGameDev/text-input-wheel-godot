@@ -1,0 +1,36 @@
+name: Copy file to another repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source repository
+      uses: actions/checkout@v2
+      with:
+        repository: HyperGameDev/text-input-wheel-godot
+        path: source
+
+    - name: Checkout destination repository
+      uses: actions/checkout@v2
+      with:
+        repository: HyperGameDev/hypergame.dev
+        path: destination
+        token: ${{ secrets.DESTINATION_REPO_TOKEN }}
+
+    - name: Copy file
+      run: cp source/export/data.json destination/data/wheel-topics.json
+
+    - name: Commit and push changes
+      run: |
+        cd destination
+        git config --global user.email "lyz@hypergame.dev"
+        git config --global user.name "HyperGameDev"
+        git add data/wheel-topics.json
+        git commit -m "Update wheel-topics.json"
+        git push
