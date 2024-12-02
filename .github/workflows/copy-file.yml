@@ -26,6 +26,9 @@ jobs:
     - name: Copy file
       run: cp source/export/data.json destination/data/wheel-topics.json
 
+    - name: Make script executable
+      run: chmod +x destination/scripts/update-timestamp-topics.sh
+
     - name: Update last-updated-topics.json
       run: destination/scripts/update-timestamp-topics.sh
 
