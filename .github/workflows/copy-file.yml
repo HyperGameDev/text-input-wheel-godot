@@ -34,3 +34,8 @@ jobs:
         git add data/wheel-topics.json
         git commit -m "Update wheel-topics.json"
         git push
+
+    - name: Trigger GitHub Pages rebuild
+      run: |
+        git commit --allow-empty -m "Trigger GitHub Pages rebuild"
+        git push
