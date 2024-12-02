@@ -30,7 +30,9 @@ jobs:
       run: chmod +x destination/scripts/update-timestamp-topics.sh
 
     - name: Update last-updated-topics.json
-      run: destination/scripts/update-timestamp-topics.sh
+      run: |
+        cd destination/scripts
+        ./update-timestamp-topics.sh
 
     - name: Commit and push changes
       run: |
