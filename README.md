@@ -4,7 +4,7 @@
 
 A spinnable wheel with text inputs, history-keeping, topics display, and more.
 
-<table style="border-collapse: collapse; border: none;">
+<table style="border: none; border-collapse: collapse;">
   <tr style="border: none;">
     <td style="border: none; padding-right: 10px;">
       <img src="https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel1.png" alt="Text input wheel spun and landed on a topic">
