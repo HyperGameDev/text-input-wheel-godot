@@ -4,8 +4,16 @@
 
 A spinnable wheel with text inputs, history-keeping, topics display, and more.
 
-![screenshot](https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel1.png)
-![screenshot](https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel2.png)
+<table style="border-collapse: collapse; border: none;">
+  <tr style="border: none;">
+    <td style="border: none; padding-right: 10px;">
+      <img src="https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel1.png" alt="Text input wheel spun and landed on a topic">
+    </td>
+    <td style="border: none; padding-left: 10px;">
+      <img src="https://github.com/HyperGameDev/text-input-wheel-godot/blob/main/screenshots/wheel2.png" alt="Text input wheel with viewable history of topics">
+    </td>
+  </tr>
+</table>
 
 <h1 align="left">
   Credits
