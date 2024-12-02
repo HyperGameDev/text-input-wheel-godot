@@ -1,5 +1,5 @@
 <h1>
-  Spin Wheel Godot
+  Text Input Wheel (Godot)
 </h1>
 
 A spinnable wheel with text inputs, history-keeping, topics display, and more.
