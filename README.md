@@ -24,3 +24,4 @@ A spinnable wheel with text inputs, history-keeping, topics display, and more.
 - OceanUwU (Winning Option Popup, Fixes)
 - Precipire (Winner History)
 - Kieguy (Past Winner Research)
+- rulric, murvkins, Dungeon Martian, Timeless, Shawn S, Dormouse, Joshua V, Migats21, Precipire (Coin Flip Consultants)
