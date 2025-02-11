@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmoymmfdg1q60"]
+
+[ext_resource type="PackedScene" uid="uid://chg5ltr1bwgaf" path="res://addons/coin_mesh/coin_mesh.gltf" id="1_elr6w"]
+[ext_resource type="Texture2D" uid="uid://bsc40g2bvq6yf" path="res://addons/coin_mesh/coin_head.png" id="2_l8b1j"]
+[ext_resource type="Material" uid="uid://quojl0lbfhw" path="res://addons/coin_mesh/tails.tres" id="3_gn3xg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xww6"]
+albedo_color = Color(0.84, 0.79296, 0.1344, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ako6"]
+transparency = 1
+albedo_texture = ExtResource("2_l8b1j")
+uv1_scale = Vector3(2, 2, 2)
+
+[node name="coin_mesh" instance=ExtResource("1_elr6w")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5xww6")
+surface_material_override/1 = SubResource("StandardMaterial3D_3ako6")
+surface_material_override/2 = ExtResource("3_gn3xg")

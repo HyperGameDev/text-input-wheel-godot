@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://quojl0lbfhw"]
+
+[ext_resource type="Texture2D" uid="uid://bdf5uk1ri3loj" path="res://addons/coin_mesh/coin_tail.png" id="1_d3ca7"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_d3ca7")
+uv1_scale = Vector3(2, 2, 2)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://clfvobvi3rno6"]
+[gd_scene load_steps=32 format=3 uid="uid://clfvobvi3rno6"]
 
 [ext_resource type="Texture2D" uid="uid://o5281jsg2i68" path="res://addons/assets_spin_wheel/spin_wheel_background.png" id="1_h5jq3"]
 [ext_resource type="Script" path="res://addons/spin_wheel.gd" id="1_oakmn"]
@@ -9,8 +9,11 @@
 [ext_resource type="FontFile" uid="uid://c8b0gljcc5kwx" path="res://addons/assets_spin_wheel/norwester.otf" id="4_nns8t"]
 [ext_resource type="Texture2D" uid="uid://swfesmtw11ic" path="res://addons/assets_spin_wheel/spin_wheel_button_press.png" id="4_taphi"]
 [ext_resource type="Texture2D" uid="uid://cbu3r8pscyuvj" path="res://addons/assets_spin_wheel/spin_wheel_arrow.png" id="6_iiacy"]
+[ext_resource type="Texture2D" uid="uid://wissxf743cdl" path="res://addons/assets_spin_wheel/Coin_Wheel.png" id="10_bahf7"]
 [ext_resource type="Texture2D" uid="uid://cpfuv641u5373" path="res://addons/icon_history.png" id="10_k1min"]
+[ext_resource type="Texture2D" uid="uid://c3b1tcxrfhll1" path="res://addons/coin_mesh/coin_tada.png" id="11_px53a"]
 [ext_resource type="Texture2D" uid="uid://b2j534py5b0im" path="res://addons/icon_reset.png" id="11_xdlmj"]
+[ext_resource type="PackedScene" uid="uid://bmoymmfdg1q60" path="res://addons/coin_mesh/coin.tscn" id="13_sbacw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hjib"]
 shader = ExtResource("2_lk47c")
@@ -24,6 +27,9 @@ shader_parameter/blur = 0.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61ynx"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iys04"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3r3a"]
 
@@ -147,7 +153,293 @@ _data = {
 "Show_fade": SubResource("Animation_2tm53")
 }
 
-[node name="spin_wheel" type="Control" node_paths=PackedStringArray("text_box")]
+[sub_resource type="Animation" id="Animation_eib1d"]
+resource_name = "flip"
+length = 7.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 3.25, 3.6, 4.61624, 5.1, 5.55, 6.2, 6.55, 7.5, 7.85),
+"transitions": PackedFloat32Array(0.5, 1, 0.450625, 1, 1, 3.605, 1, 1, 1, 0.297, 1),
+"update": 0,
+"values": [Vector3(0, 0.154432, 0), Vector3(0, 1.414, 0), Vector3(0, 1.414, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 3.479, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 1.359, 0), Vector3(0, 1.359, 0), Vector3(0, 1.084, 2.69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.2, 1.55, 1.9, 2.25, 2.7, 3.1, 4.65, 4.95, 5.35, 5.55, 6.88333, 7.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 0.297302, 1, 1, 1, 1, 0.435275, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(6.28319, 0, 0), Vector3(-6.28319, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.4399, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5.65, 7.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_animation_coin_flipped"
+}, {
+"args": [],
+"method": &"_animation_coin_side_revealed"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 7.45, 7.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 7.5, 7.9),
+"transitions": PackedFloat32Array(1, 0.297, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(4.28, 4.28)]
+}
+
+[sub_resource type="Animation" id="Animation_k1oin"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.154432, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cjbgv"]
+resource_name = "idle"
+length = 20.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.084, 2.69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 7.5, 12.5, 17.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.4399, 0, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.28, 4.28)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_im243"]
+resource_name = "coin_enter"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -2.146, 0), Vector3(0, 0.154432, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_coin_entered"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ji8gr"]
+_data = {
+"RESET": SubResource("Animation_k1oin"),
+"coin_enter": SubResource("Animation_im243"),
+"flip": SubResource("Animation_eib1d"),
+"idle": SubResource("Animation_cjbgv")
+}
+
+[node name="spin_wheel" type="Control" node_paths=PackedStringArray("text_box", "coin_icon")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -156,7 +448,10 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(440, 622)
 script = ExtResource("1_oakmn")
+coin_flip_mode = true
+power = 1.0
 text_box = NodePath("wheel_outline/front/Centre/B")
+coin_icon = NodePath("wheel_outline/front/Centre/Coin")
 
 [node name="Background" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_8hjib")
@@ -168,6 +463,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="wheel_outline" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -207,6 +503,15 @@ offset_left = -6.10352e-05
 offset_right = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Coin" type="TextureRect" parent="wheel_outline/front/Centre"]
+layout_mode = 0
+offset_left = -84.7825
+offset_top = -316.304
+offset_right = 395.218
+offset_bottom = 163.696
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("10_bahf7")
 
 [node name="B" type="LineEdit" parent="wheel_outline/front/Centre"]
 layout_mode = 1
@@ -267,18 +572,48 @@ texture_normal = ExtResource("3_i8ccs")
 texture_pressed = ExtResource("4_taphi")
 stretch_mode = 3
 
-[node name="arrow" type="TextureRect" parent="wheel_outline"]
+[node name="arrow" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -100.0
+offset_top = 50.0
 offset_right = 100.0
-offset_bottom = 181.0
+offset_bottom = 231.0
 grow_horizontal = 2
 scale = Vector2(0.479999, 0.479999)
 pivot_offset = Vector2(100, 0)
 texture = ExtResource("6_iiacy")
+
+[node name="Coin_Flip_Minigame" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_top = 616.0
+offset_bottom = 616.0
+mouse_filter = 2
+
+[node name="Texture_tada" type="TextureRect" parent="Coin_Flip_Minigame"]
+visible = false
+layout_mode = 0
+offset_left = 328.0
+offset_top = -378.0
+offset_right = 808.0
+offset_bottom = 102.0
+pivot_offset = Vector2(240, 240)
+texture = ExtResource("11_px53a")
+
+[node name="Texture_coin" type="TextureRect" parent="Coin_Flip_Minigame"]
+layout_mode = 0
+offset_left = -422.0
+offset_top = -932.0
+offset_right = 90.0
+offset_bottom = -420.0
+scale = Vector2(3.875, 3.875)
+mouse_filter = 2
+texture = SubResource("ViewportTexture_iys04")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -402,6 +737,32 @@ theme_override_fonts/font = ExtResource("4_nns8t")
 icon = ExtResource("11_xdlmj")
 expand_icon = true
 
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="coin_mesh" parent="SubViewport" instance=ExtResource("13_sbacw")]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 7.58)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ji8gr")
+}
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(0.87462, 0.480662, -0.0632803, 0, 0.130526, 0.991445, 0.48481, -0.867137, 0.114161, 0, 0.284978, 4.36476)
+light_color = Color(0.625597, 0.625597, 0.625597, 1)
+light_energy = 6.283
+light_angular_distance = 8.39
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 5.103
+shadow_blur = 1.987
+
 [connection signal="pressed" from="wheel_outline/btn_spin" to="." method="_on_btn_spin_pressed"]
 [connection signal="toggled" from="History/Button_History" to="." method="_on_history_button_toggled"]
 [connection signal="pressed" from="History/Button_Reset" to="." method="_on_button_reset_pressed"]
+
+[editable path="SubViewport/coin_mesh"]
