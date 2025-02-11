@@ -14,7 +14,7 @@ var text_boxes: Array[LineEdit] = []
 var target_rot: float = 0
 var from_rot: float
 
-var save_path: String = "res://export/data.json"
+var save_path: String = "res://data.json"
 
 
 @onready var history_label: Control = %History_Label
@@ -25,6 +25,7 @@ var save_path: String = "res://export/data.json"
 @onready var animation: AnimationPlayer = %AnimationPlayer
 @onready var coin: MeshInstance3D = $SubViewport/coin_mesh/Cylinder
 @onready var coin_flip_minigame: Control = %Coin_Flip_Minigame
+var current_choice_memory: String
 
 
 var vat_pham: Array[Dictionary] = [
@@ -146,23 +147,22 @@ func _on_btn_spin_pressed():
 		tween.tween_property(%front, "rotation_degrees", reward_position +  360 * speed * power , 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CIRC)
 		await tween.finished
 		#print("Wheel spun! On: ",selected)
-		var current_choice = selected.text_box.text
+		var current_choice: String = selected.text_box.text
 		%Theme.text = current_choice
 		
 		assign_banner_colors(selected)
-		check_if_has_coin(selected,current_choice)
 		var old_rotation_degrees = %front.rotation_degrees
 		#set is_spin = false to tell for user can press again
 		is_spin = false
 		%front.rotation_degrees = fmod(old_rotation_degrees, 360)
+		
 		if selected.has_coin:
 			show_coin_flip()
+			current_choice_memory = current_choice
 		else:
 			show_banner()
-			
-		if heads or not coin_flip_mode:
 			purge_history(current_choice)
-
+			
 ## HISTORY CODE
 
 func log_history(entries: Array, history: Dictionary):
@@ -182,7 +182,9 @@ func purge_history(winner):
 	if file:
 		var content = JSON.parse_string(file.get_as_text())
 		var data = content as Dictionary
+		#print("Data purge attempted on ",winner)
 		if data.has(winner):
+			#print("Data has ",winner)
 			data.erase(winner)
 			file = FileAccess.open(save_path, FileAccess.WRITE)
 			file.store_string(JSON.stringify(data, "\t"))
@@ -215,10 +217,6 @@ func assign_banner_colors(selected):
 		#(%Panel as Panel).get_material().set_shader_parameter("color_one",selected.color)
 		(%Theme as Label).add_theme_color_override("font_outline_color", selected.color)
 		
-func check_if_has_coin(selected,current):
-	if selected.has_coin:
-		print(current," has a coin!")
-		
 func show_banner():
 	var banner_tween = get_tree().create_tween()
 	banner_tween.set_ease(Tween.EASE_IN_OUT)
@@ -244,6 +242,7 @@ func _animation_coin_side_revealed():
 	animation.play("idle")
 	if heads:
 		show_banner()
+		purge_history(current_choice_memory)
 
 func modulate_wheel_alpha(alpha,flip_coin):
 	var overlay_tween = get_tree().create_tween()

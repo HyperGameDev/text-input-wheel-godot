@@ -153,76 +153,6 @@ _data = {
 "Show_fade": SubResource("Animation_2tm53")
 }
 
-[sub_resource type="Animation" id="Animation_eib1d"]
-resource_name = "flip"
-length = 7.9
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("coin_mesh/Cylinder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 3.25, 3.6, 4.61624, 5.1, 5.55, 6.2, 6.55, 7.5, 7.85),
-"transitions": PackedFloat32Array(0.5, 1, 0.450625, 1, 1, 3.605, 1, 1, 1, 0.297, 1),
-"update": 0,
-"values": [Vector3(0, 0.154432, 0), Vector3(0, 1.414, 0), Vector3(0, 1.414, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 3.479, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 1.359, 0), Vector3(0, 1.359, 0), Vector3(0, 1.084, 2.69)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.2, 1.55, 1.9, 2.25, 2.7, 3.1, 4.65, 4.95, 5.35, 5.55, 6.88333, 7.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 0.297302, 1, 1, 1, 1, 0.435275, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(6.28319, 0, 0), Vector3(-6.28319, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.4399, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(5.65, 7.9),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"_animation_coin_flipped"
-}, {
-"args": [],
-"method": &"_animation_coin_side_revealed"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 7.45, 7.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, false, true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 7.5, 7.9),
-"transitions": PackedFloat32Array(1, 0.297, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(4.28, 4.28)]
-}
-
 [sub_resource type="Animation" id="Animation_k1oin"]
 length = 0.001
 tracks/0/type = "value"
@@ -284,72 +214,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_cjbgv"]
-resource_name = "idle"
-length = 20.0
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("coin_mesh/Cylinder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.084, 2.69)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.5, 7.5, 12.5, 17.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1.4399, 0, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(4.28, 4.28)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28319]
 }
 
 [sub_resource type="Animation" id="Animation_im243"]
@@ -429,6 +293,142 @@ tracks/5/keys = {
 "args": [],
 "method": &"_animation_coin_entered"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_eib1d"]
+resource_name = "flip"
+length = 7.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 3.25, 3.6, 4.61624, 5.1, 5.55, 6.2, 6.55, 7.5, 7.85),
+"transitions": PackedFloat32Array(0.5, 1, 0.450625, 1, 1, 3.605, 1, 1, 1, 0.297, 1),
+"update": 0,
+"values": [Vector3(0, 0.154432, 0), Vector3(0, 1.414, 0), Vector3(0, 1.414, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 3.479, 0), Vector3(0, 0.154432, 0), Vector3(0, 0.154432, 0), Vector3(0, 1.359, 0), Vector3(0, 1.359, 0), Vector3(0, 1.084, 2.69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.2, 1.55, 1.9, 2.25, 2.7, 3.1, 4.65, 4.95, 5.35, 5.55, 6.88333, 7.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 0.297302, 1, 1, 1, 1, 0.435275, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 0, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 3.14159, 0), Vector3(1.52716, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(6.28319, 0, 0), Vector3(-6.28319, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1.4399, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5.65, 7.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_animation_coin_flipped"
+}, {
+"args": [],
+"method": &"_animation_coin_side_revealed"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 7.45, 7.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 7.5, 7.9),
+"transitions": PackedFloat32Array(1, 0.297, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(4.28, 4.28)]
+}
+
+[sub_resource type="Animation" id="Animation_cjbgv"]
+resource_name = "idle"
+length = 20.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin_mesh/Cylinder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.084, 2.69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("coin_mesh/Cylinder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 7.5, 12.5, 17.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.4399, 0, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0), Vector3(1.4399, 0.366519, 0), Vector3(1.4399, -0.366519, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Coin_Flip_Minigame/Texture_tada:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Coin_Flip_Minigame/Texture_tada:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.28, 4.28)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Coin_Flip_Minigame/Texture_tada:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ji8gr"]
@@ -741,6 +741,9 @@ expand_icon = true
 transparent_bg = true
 
 [node name="coin_mesh" parent="SubViewport" instance=ExtResource("13_sbacw")]
+
+[node name="Cylinder" parent="SubViewport/coin_mesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154432, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 7.58)
